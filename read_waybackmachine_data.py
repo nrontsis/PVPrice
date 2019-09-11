@@ -29,19 +29,19 @@ def get_dataframe(list_of_frames):
             return 0, False
         
 def index_map(df, module_type):
-    if module_type == "thinfilm":
+    if module_type == "ThinFlim":
         index = np.where(df[0].str.contains("ThinFilm"))[0]
-    elif module_type == "perc":
+    elif module_type == "Mono PERC":
         index = np.where(df[0] == "Mono High Eff / PERC Module")[0]
-    elif module_type == "perc_china":
+    elif module_type == "Mono PERC (China)":
         index = np.where(df[0].str.find("Mono High Eff / PERC Module in China") == 0)[0]
-    elif module_type == "mono":
+    elif module_type == "Mono":
         index = np.where(df[0].str.contains("Mono Silicon Solar Module"))[0]
-    elif module_type == "poly_eff":
+    elif module_type == "Poly High Efficiency":
         index = np.where(df[0].str.contains("Poly High Eff / PERC Module"))[0]
-    elif module_type == "poly_china":
+    elif module_type == "Poly (China)":
         index = np.where(df[0].str.contains("Poly Module in China"))[0]
-    elif module_type == "poly":
+    elif module_type == "Poly":
         index = np.where(
             np.logical_or(
                 np.logical_or(
@@ -100,13 +100,13 @@ def extract_prices(df, index):
     return high_price, low_price, mean_price
 '''
 df = pd.DataFrame(columns=['timestamp',
-    'thinfilm_high', 'thinfilm_low', 'thinfilm_mean',
-    'perc_high', 'perc_low', 'perc_mean',
-    'perc_china_high', 'perc_china_low', 'perc_china_mean',
-    'mono_high', 'mono_low', 'mono_mean',
-    'poly_eff_high', 'poly_eff_low', 'poly_eff_mean',
-    'poly_china_high', 'poly_china_low', 'poly_china_mean',
-    'poly_high', 'poly_low', 'poly_mean',
+    'ThinFlim_high', 'ThinFlim_low', 'ThinFlim_mean',
+    'Mono PERC_high', 'Mono PERC_low', 'Mono PERC_mean',
+    'Mono PERC (China)_high', 'Mono PERC (China)_low', 'Mono PERC (China)_mean',
+    'Mono_high', 'Mono_low', 'Mono_mean',
+    'Poly High Efficiency_high', 'Poly High Efficiency_low', 'Poly High Efficiency_mean',
+    'Poly (China)_high', 'Poly (China)_low', 'Poly (China)_mean',
+    'Poly_high', 'Poly_low', 'Poly_mean',
     ]
 )
 i = 0
@@ -120,7 +120,7 @@ for root, dirs, files in os.walk("websites/"):
                 if success:
                     datetime = pd.to_datetime(root.split('/')[2])
                     data = [datetime]
-                    for module_type in ["thinfilm", "perc", "perc_china", "mono", "poly_eff", "poly_china", "poly"]:
+                    for module_type in ["ThinFlim", "Mono PERC", "Mono PERC (China)", "Mono", "Poly High Efficiency", "Poly (China)", "Poly"]:
                         index = index_map(frame, module_type)
                         if index >= 0:
                             h, l, m = extract_prices(frame, index)
@@ -145,14 +145,15 @@ def plot_prices(df, module_type):
     l = df[module_type + '_low']
     fig = plt.figure(figsize=(6, 3.5))
     ax = fig.add_subplot(111)
-    ax.plot(df.index, m, 'b', lw=2)
+    ax.semilogy(df.index, m, 'b', lw=2)
     ax.fill_between(df.index, l, h, color='blue', alpha=0.2)
-    # ax.yaxis.set_major_locator(ticker.LogLocator(base=10, subs=np.arange(1, 10)+0.5))
+    ax.yaxis.set_minor_locator(ticker.LogLocator(base=10, subs=np.arange(2, 10, step=1.0)))
     # ax.yaxis.set_major_locator(ticker.LogLocator(base=10, subs='all'))
-    # ax.yaxis.set_minor_locator(ticker.MultipleLocator(0.01))
+    # ax.yaxis.set_minor_locator(ticker.MultipleLocator(0.05))
+    plt.ylim((0.2, 2.25))
     # ax.yaxis.set_major_formatter(ticker.ScalarFormatter())
-    # ax.yaxis.set_minor_formatter(ticker.NullFormatter())
-    # ax.tick_params(axis='both', which='both')
+    ax.yaxis.set_minor_formatter(ticker.LogFormatter(labelOnlyBase=False, minor_thresholds=(100, 0.01)))
+    ax.tick_params(axis='both', which='both')
     years = mdates.YearLocator()   # every year
     yearsFmt = mdates.DateFormatter('%Y')
     ax.xaxis.set_major_locator(years)
@@ -162,12 +163,12 @@ def plot_prices(df, module_type):
     plt.grid(True, 'both')
     plt.xlabel('Time')
     plt.ylabel('Price ($/Watt)')
-    plt.title('Historical Prices of ' + module_type + ' Module Prices (PVInsights.com)')
+    plt.title('Historical Prices of ' + module_type + ' Modules')
     fig.savefig(module_type + ".pdf", bbox_inches='tight')
     
     return fig
 
-for module_type in ["thinfilm", "perc", "perc_china", "mono", "poly_eff", "poly_china", "poly"]:
+for module_type in ["ThinFlim", "Mono PERC", "Mono PERC (China)", "Mono", "Poly High Efficiency", "Poly (China)", "Poly"]:
     fig = plot_prices(df, module_type)
 
 plt.show()

@@ -1,4 +1,4 @@
-timestamp,thinfilm_high,thinfilm_low,thinfilm_mean,perc_high,perc_low,perc_mean,perc_china_high,perc_china_low,perc_china_mean,mono_high,mono_low,mono_mean,poly_eff_high,poly_eff_low,poly_eff_mean,poly_china_high,poly_china_low,poly_china_mean,poly_high,poly_low,poly_mean
+timestamp,ThinFlim_high,ThinFlim_low,ThinFlim_mean,Mono PERC_high,Mono PERC_low,Mono PERC_mean,Mono PERC (China)_high,Mono PERC (China)_low,Mono PERC (China)_mean,Mono_high,Mono_low,Mono_mean,Poly High Efficiency_high,Poly High Efficiency_low,Poly High Efficiency_mean,Poly (China)_high,Poly (China)_low,Poly (China)_mean,Poly_high,Poly_low,Poly_mean
 2009-06-25 11:06:59,1.2,1.0,1.04,,,,,,,,,,,,,,,,2.2,1.75,1.89
 2009-08-17 12:30:20,1.35,1.2,1.25,,,,,,,,,,,,,,,,2.25,1.9,2.01
 2009-08-18 18:04:59,1.35,1.2,1.25,,,,,,,,,,,,,,,,2.25,1.9,2.01

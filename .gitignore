@@ -1,2 +1,4 @@
 websites/**
 test/**
+stderr.log
+stdout.log

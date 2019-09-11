@@ -1,0 +1,24 @@
+Unit: USD / Watt
+Solar Panel / Solar Module Weekly Spot Price
+ThinFilm Solar Module
+Solar PV Module Weekly Spot Price
+Solar Module Weekly Spot Price
+Unit: US$
+Silicon Module Price Per Watt
+India Poly Module
+Mono Silicon Solar Module
+Mono High Eff / PERC Module in China
+Poly Module in China
+ThinFilm Module Per Watt
+Mono High Eff / PERC Module
+Silicon Solar Module
+Unit: USD Per Watt
+US Multi Solar Module
+Silicon PV Module Price Per Watt
+ThinFilm Module Price Per Watt
+Item
+Poly Solar Module
+Silicon Module Per Watt
+Poly Silicon Solar Module
+Poly High Eff / PERC Module
+ThinFilm PV Module Price Per Watt
